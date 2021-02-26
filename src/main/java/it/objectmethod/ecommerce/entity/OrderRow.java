@@ -1,5 +1,6 @@
 package it.objectmethod.ecommerce.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -14,8 +15,20 @@ public class OrderRow {
 	
 	@GeneratedValue
 	@Id
+	@Column(name = "id_riga_ordine")
 	private Long id;
 	
+	@Column(name = "quantita")
+	private Integer quantity;
+	
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "id_ordine")
 	private Order order;

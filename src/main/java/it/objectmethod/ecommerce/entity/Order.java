@@ -3,6 +3,7 @@ package it.objectmethod.ecommerce.entity;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,9 +45,9 @@ public class Order {
 	}
 
 	@JsonIgnore
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_ordine")
-	private List<Item> items;
+	private List<OrderRow> orderRows;
 
 	public Long getId() {
 		return id;
@@ -64,13 +65,23 @@ public class Order {
 		this.orderNumber = orderNumber;
 	}
 
-	public List<Item> getItems() {
-		return items;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setItems(List<Item> items) {
-		this.items = items;
+	public void setDate(Date date) {
+		this.date = date;
 	}
+
+	public List<OrderRow> getOrderRows() {
+		return orderRows;
+	}
+
+	public void setOrderRows(List<OrderRow> orderRows) {
+		this.orderRows = orderRows;
+	}
+
+	
 
 	
 

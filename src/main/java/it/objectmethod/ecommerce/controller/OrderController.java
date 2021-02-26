@@ -1,6 +1,8 @@
 package it.objectmethod.ecommerce.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import it.objectmethod.ecommerce.entity.Cart;
 import it.objectmethod.ecommerce.entity.CartDetail;
 import it.objectmethod.ecommerce.entity.Item;
 import it.objectmethod.ecommerce.entity.Order;
+import it.objectmethod.ecommerce.entity.OrderRow;
 import it.objectmethod.ecommerce.entity.User;
 import it.objectmethod.ecommerce.repo.CartRepository;
 import it.objectmethod.ecommerce.repo.OrderRepository;
@@ -47,13 +50,19 @@ public class OrderController {
 			order.setUser(user);
 			order.setOrderNumber("A000" + cart.getId());// Creazione di un numero ordine provvisorio univoco
 			List<CartDetail> cartDetails = cart.getDetails();
-			List<Item> orderItems = new ArrayList<>();
+			List<OrderRow> orderItems = new ArrayList<>();
 			for (CartDetail detail : cartDetails) {
 				Item item = detail.getItem();
 				item.setAvailability(item.getAvailability() - detail.getQuantity());
-				orderItems.add(item);
+				OrderRow row = new OrderRow();
+				row.setItem(item);
+				row.setOrder(order);
+				row.setQuantity(detail.getQuantity());
+				orderItems.add(row);
 			}
-			order.setItems(orderItems);
+			order.setOrderRows(orderItems);
+			Date date = new Date(Calendar.getInstance().getTime().getTime());
+			order.setDate(date);
 
 			order = orderRepo.save(order);
 			cartRepo.delete(cart);
