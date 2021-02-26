@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,28 +15,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "utente")
 public class User {
-	
+
 	@GeneratedValue
 	@Id
 	@Column(name = "id_utente")
 	private Long id;
-	
+
 	@Column(name = "nome_utente")
 	private String name;
-	
+
 	@Column(name = "password")
 	private String password;
-	
-	
+
 	@JsonIgnore
-	@OneToMany(mappedBy = "user",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Order> orders;
 
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -64,9 +62,5 @@ public class User {
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
-	
-	
-	
-	
 
 }

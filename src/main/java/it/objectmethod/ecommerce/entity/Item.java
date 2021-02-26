@@ -20,7 +20,7 @@ public class Item {
 	@GeneratedValue
 	@Id
 	@Column(name = "id_articolo")
-	private long id;
+	private Long id;
 
 	@Column(name = "nome_articolo")
 	private String name;
@@ -29,7 +29,7 @@ public class Item {
 	private String code;
 
 	@Column(name = "disponibilita")
-	private int availability;
+	private Integer availability;
 
 	@Column(name = "prezzo_unitario")
 	private int price;
@@ -43,7 +43,7 @@ public class Item {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
