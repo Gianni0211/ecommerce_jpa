@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.objectmethod.ecommerce.entity.Cart;
@@ -22,6 +22,7 @@ import it.objectmethod.ecommerce.entity.User;
 import it.objectmethod.ecommerce.repo.CartRepository;
 import it.objectmethod.ecommerce.repo.OrderRepository;
 import it.objectmethod.ecommerce.repo.UserRepository;
+import it.objectmethod.ecommerce.service.JWTService;
 
 @RestController
 @RequestMapping("/api/order")
@@ -35,11 +36,15 @@ public class OrderController {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private JWTService jwtSrv;
 
 	@PostMapping("/save")
-	public ResponseEntity<String> saveOrder(@RequestParam("user-id") Long userId) {
+	public ResponseEntity<String> saveOrder(@RequestHeader("auth-token") String token) {
 
 		ResponseEntity<String> resp = null;
+		Long userId = jwtSrv.getUserIdFromToken(token);
 		User user = userRepo.findById(userId).get();
 		Cart cart = null;
 		cart = cartRepo.findByUserId(userId);
