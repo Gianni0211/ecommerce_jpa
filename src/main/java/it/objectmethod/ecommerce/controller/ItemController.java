@@ -16,9 +16,9 @@ public class ItemController {
 
 	@Autowired
 	ItemRepository repo;
-	
+
 	@RequestMapping("/find")
-	public List<Item> getItemsByCodeAndName(@RequestParam("code") String code, @RequestParam("name") String name){
+	public List<Item> getItemsByCodeAndName(@RequestParam("code") String code, @RequestParam("name") String name) {
 		return repo.findAllItemsByCodeOrName(code, name);
 	}
 }

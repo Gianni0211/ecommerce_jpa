@@ -27,7 +27,7 @@ public class Order {
 
 	@Column(name = "numero_ordine")
 	private String orderNumber;
-	
+
 	@Column(name = "data_ordine")
 	private Date date;
 
@@ -80,9 +80,5 @@ public class Order {
 	public void setOrderRows(List<OrderRow> orderRows) {
 		this.orderRows = orderRows;
 	}
-
-	
-
-	
 
 }

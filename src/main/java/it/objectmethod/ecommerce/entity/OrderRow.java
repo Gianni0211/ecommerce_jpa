@@ -12,15 +12,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "riga_ordine")
 public class OrderRow {
-	
+
 	@GeneratedValue
 	@Id
 	@Column(name = "id_riga_ordine")
 	private Long id;
-	
+
 	@Column(name = "quantita")
 	private Integer quantity;
-	
+
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -32,7 +32,7 @@ public class OrderRow {
 	@ManyToOne
 	@JoinColumn(name = "id_ordine")
 	private Order order;
-	
+
 	@OneToOne
 	@JoinColumn(name = "id_articolo")
 	private Item item;
@@ -60,7 +60,5 @@ public class OrderRow {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	
-	
 
 }

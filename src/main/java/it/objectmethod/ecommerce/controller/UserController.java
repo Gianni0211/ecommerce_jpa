@@ -15,11 +15,11 @@ public class UserController {
 
 	@Autowired
 	private UserRepository repo;
-	
+
 	@GetMapping("/login")
 	public User login(@RequestParam("user_name") String userName, @RequestParam("password") String password) {
 		User user = repo.findByNameAndPassword(userName, password);
 		return user;
 	}
-	
+
 }

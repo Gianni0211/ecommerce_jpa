@@ -44,6 +44,7 @@ public class CartController {
 			cart = cartRepo.findByUserId(userId);
 
 			List<CartDetail> details = null;
+			
 			if (cart == null) {
 				cart = new Cart();
 				cart.setUser(user);
