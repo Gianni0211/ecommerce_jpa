@@ -1,5 +1,8 @@
 package it.objectmethod.ecommerce.service;
 
+import java.sql.Date;
+import java.time.ZonedDateTime;
+
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -18,7 +21,8 @@ public class JWTService {
 	public String createJWTToken(User user) {
 
 		Algorithm alg = Algorithm.HMAC256(MY_SECRET_JWT_KEY);
-		String token = JWT.create().withClaim("user_id", user.getId()).withClaim("user_name", user.getName()).sign(alg);
+		String token = JWT.create().withClaim("user_id", user.getId()).withClaim("user_name", user.getName())
+				.withExpiresAt(Date.from(ZonedDateTime.now().plusMinutes(10).toInstant())).sign(alg);
 
 		return token;
 

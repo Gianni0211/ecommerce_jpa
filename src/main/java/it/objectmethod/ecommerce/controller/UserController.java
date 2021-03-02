@@ -1,6 +1,7 @@
 package it.objectmethod.ecommerce.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,12 +27,17 @@ public class UserController {
 	public ResponseEntity<User> login(@RequestParam("user-name") String userName,
 			@RequestParam("password") String password) {
 		ResponseEntity<User> resp = null;
+
 		User user = null;
 		user = repo.findByNameAndPassword(userName, password);
+
 		if (user != null) {
+
 			String token = jwtSrv.createJWTToken(user);
+			HttpHeaders respHeaders = new HttpHeaders();
+			respHeaders.set("auth-token", token);
 			System.out.println(token);
-			resp = new ResponseEntity<>(user, HttpStatus.OK);
+			resp = new ResponseEntity<>(user, respHeaders, HttpStatus.OK);
 
 		} else {
 			resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
