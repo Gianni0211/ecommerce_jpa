@@ -33,7 +33,7 @@ public class AuthFilter implements Filter {
 		if (url.endsWith("/login")) {
 
 			System.out.println("RICHIESTA APPROVATA");
-			
+
 			chain.doFilter(request, response);
 		} else {
 			String token = httpReq.getHeader("auth-token");
@@ -56,14 +56,12 @@ public class AuthFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }
