@@ -1,17 +1,10 @@
 package it.objectmethod.ecommerce.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "articolo")
@@ -34,12 +27,7 @@ public class Item {
 	@Column(name = "prezzo_unitario")
 	private int price;
 
-	@JsonIgnore
-	@ManyToMany
-	@JoinTable(name = "riga_ordine", joinColumns = @JoinColumn(name = "id_articolo", referencedColumnName = "id_articolo"), inverseJoinColumns = @JoinColumn(name = "id_ordine", referencedColumnName = "id_ordine"))
-	private List<Order> orders;
-
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -63,11 +51,11 @@ public class Item {
 		this.code = code;
 	}
 
-	public int getAvailability() {
+	public Integer getAvailability() {
 		return availability;
 	}
 
-	public void setAvailability(int availability) {
+	public void setAvailability(Integer availability) {
 		this.availability = availability;
 	}
 
@@ -79,11 +67,4 @@ public class Item {
 		this.price = price;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
 }

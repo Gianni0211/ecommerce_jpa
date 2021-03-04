@@ -1,8 +1,7 @@
 package it.objectmethod.ecommerce.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,21 +35,18 @@ public class OrderController {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private JWTService jwtSrv;
 
 	@PostMapping("/save")
-	public ResponseEntity<String> saveOrder(@RequestHeader("auth-token") String token) {
+	public ResponseEntity<Order> saveOrder(@RequestHeader("auth-token") String token) {
 
-		ResponseEntity<String> resp = null;
+		ResponseEntity<Order> resp = null;
 		Long userId = jwtSrv.getUserIdFromToken(token);
 		User user = userRepo.findById(userId).get();
-		Cart cart = null;
-		cart = cartRepo.findByUserId(userId);
-		if (cart == null) {
-			resp = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-		} else {
+		Cart cart = cartRepo.findByUserId(userId);
+		if (cart != null) {
 			Order order = new Order();
 			order.setUser(user);
 			order.setOrderNumber("A000" + cart.getId());// Creazione di un numero ordine provvisorio univoco
@@ -66,13 +62,16 @@ public class OrderController {
 				orderItems.add(row);
 			}
 			order.setOrderRows(orderItems);
-			Date date = new Date(Calendar.getInstance().getTime().getTime());
+			Date date = new Date();
 			order.setDate(date);
 
 			order = orderRepo.save(order);
 			cartRepo.delete(cart);
 
-			resp = new ResponseEntity<String>("L' ordine e stato effettuato", HttpStatus.OK);
+			resp = new ResponseEntity<Order>(order, HttpStatus.OK);
+		} else {
+
+			resp = new ResponseEntity<Order>(HttpStatus.BAD_REQUEST);
 
 		}
 

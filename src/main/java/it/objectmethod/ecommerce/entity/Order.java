@@ -1,6 +1,6 @@
 package it.objectmethod.ecommerce.entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
 @Table(name = "ordine")
@@ -36,15 +34,6 @@ public class Order {
 	@ManyToOne
 	private User user;
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_ordine")
 	private List<OrderRow> orderRows;
@@ -71,6 +60,14 @@ public class Order {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<OrderRow> getOrderRows() {

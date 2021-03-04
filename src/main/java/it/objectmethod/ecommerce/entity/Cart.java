@@ -33,14 +33,6 @@ public class Cart {
 		return id;
 	}
 
-	public List<CartDetail> getDetails() {
-		return details;
-	}
-
-	public void setDetails(List<CartDetail> details) {
-		this.details = details;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -51,6 +43,14 @@ public class Cart {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<CartDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<CartDetail> details) {
+		this.details = details;
 	}
 
 }

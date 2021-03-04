@@ -48,48 +48,44 @@ public class CartController {
 
 			Item item = optItem.get();
 
-			Cart cart = null;
-			cart = cartRepo.findByUserId(userId);
+			Cart cart = cartRepo.findByUserId(userId);
 
-			List<CartDetail> details = null;
+			List<CartDetail> details = new ArrayList<>();
 
 			if (cart == null) {
 				cart = new Cart();
 				cart.setUser(user);
-				details = new ArrayList<>();
 
 			} else {
-
 				details = cart.getDetails();
 
 			}
 
-			if (item.getAvailability() < qnt) {
-				resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			} else {
-
+			if (item.getAvailability() >= qnt) {
 				CartDetail detail = new CartDetail();
 				Boolean isPresent = false;
-				if (!details.isEmpty()) {
-					for (CartDetail de : details) {
-						if (de.getItem() == item && (qnt + de.getQuantity()) < item.getAvailability()) {
-							de.setQuantity(qnt + de.getQuantity());
-							isPresent = true;
-						}
+
+				for (CartDetail de : details) {
+					Integer finalQnt = qnt + de.getQuantity();
+					if (de.getItem().getId().equals(item.getId()) && finalQnt < item.getAvailability()) {
+						de.setQuantity(finalQnt);
+						isPresent = true;
 					}
 				}
-				if (!isPresent) {
 
+				if (!isPresent) {
 					detail.setItem(item);
 					detail.setQuantity(qnt);
 
 					details.add(detail);
 				}
-
 				cart.setDetails(details);
 				cart = cartRepo.save(cart);
 
 				resp = new ResponseEntity<>(cart, HttpStatus.OK);
+			} else {
+
+				resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
 
 		} else {
