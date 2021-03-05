@@ -9,35 +9,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.objectmethod.ecommerce.entity.User;
-import it.objectmethod.ecommerce.repo.UserRepository;
-import it.objectmethod.ecommerce.service.JWTService;
+import it.objectmethod.ecommerce.service.UserService;
+import it.objectmethod.ecommerce.service.dto.UserDTO;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
 
 	@Autowired
-	private UserRepository repo;
-
-	@Autowired
-	private JWTService jwtSrv;
+	private UserService userService;
 
 	@GetMapping("/login")
-	public ResponseEntity<User> login(@RequestParam("user-name") String userName,
+	public ResponseEntity<UserDTO> login(@RequestParam("user-name") String userName,
 			@RequestParam("password") String password) {
-		ResponseEntity<User> resp = null;
+		ResponseEntity<UserDTO> resp = null;
+		UserDTO userDto = userService.loginUser(userName, password);
+		if (userDto != null) {
 
-		User user = null;
-		user = repo.findByNameAndPassword(userName, password);
-
-		if (user != null) {
-
-			String token = jwtSrv.createJWTToken(user);
+			String token = userService.getUserToken(userDto);
 			HttpHeaders respHeaders = new HttpHeaders();
 			respHeaders.set("auth-token", token);
-			System.out.println(token);
-			resp = new ResponseEntity<>(user, respHeaders, HttpStatus.OK);
+			resp = new ResponseEntity<>(userDto, respHeaders, HttpStatus.OK);
 
 		} else {
 			resp = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

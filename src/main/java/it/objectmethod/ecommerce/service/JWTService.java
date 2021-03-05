@@ -22,7 +22,7 @@ public class JWTService {
 
 		Algorithm alg = Algorithm.HMAC256(MY_SECRET_JWT_KEY);
 		String token = JWT.create().withClaim("user_id", user.getId()).withClaim("user_name", user.getName())
-				.withExpiresAt(Date.from(ZonedDateTime.now().plusMinutes(10).toInstant())).sign(alg);
+				.withExpiresAt(Date.from(ZonedDateTime.now().plusDays(1).toInstant())).sign(alg);
 
 		return token;
 

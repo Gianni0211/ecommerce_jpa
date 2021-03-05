@@ -23,14 +23,6 @@ public class OrderRow {
 	@Column(name = "quantita")
 	private Integer quantity;
 
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "id_ordine")
@@ -46,6 +38,14 @@ public class OrderRow {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public Order getOrder() {
