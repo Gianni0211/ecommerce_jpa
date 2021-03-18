@@ -3,6 +3,7 @@ package it.objectmethod.ecommerce.service;
 import java.sql.Date;
 import java.time.ZonedDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
@@ -12,9 +13,14 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import it.objectmethod.ecommerce.entity.User;
+import it.objectmethod.ecommerce.service.dto.UserDTO;
+import it.objectmethod.ecommerce.service.mapper.UserMapper;
 
 @Component
 public class JWTService {
+	
+	@Autowired 
+	private UserMapper userMapper;
 
 	private static final String MY_SECRET_JWT_KEY = "my-secret-jwt-key";
 
@@ -57,6 +63,13 @@ public class JWTService {
 
 		Long userId = decoded.getClaim("user_id").asLong();
 		return userId;
+	}
+	
+	public String getUserToken(UserDTO userDto) {
+		User user = userMapper.toEntity(userDto);
+		JWTService serv = new JWTService();
+		String token = serv.createJWTToken(user);
+		return token;
 	}
 
 }

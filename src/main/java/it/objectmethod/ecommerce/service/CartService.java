@@ -76,4 +76,15 @@ public class CartService {
 
 		return cartDto;
 	}
+	
+	public CartDTO getCartDto(Long userId) {
+		Cart cart = cartRepo.findByUserId(userId);
+		CartDTO cartDto = null;
+		if (cart != null) {
+			cartDto = cartMapper.toDto(cart);
+		}
+		return cartDto;
+		}
+		
+	
 }

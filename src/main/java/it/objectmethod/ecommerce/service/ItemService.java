@@ -24,4 +24,11 @@ public class ItemService {
 		List<ItemDTO> itemsDto = itemMapper.toDto(items);
 		return itemsDto;
 	}
+	
+	public List<ItemDTO> getAll(){
+		List<Item> items = itemRepo.findAll();
+		List<ItemDTO> itemsDto = itemMapper.toDto(items);
+		return itemsDto;
+		
+	}
 }

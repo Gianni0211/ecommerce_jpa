@@ -23,7 +23,7 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 
-	@GetMapping("/save")
+	@RequestMapping("/save")
 	public ResponseEntity<CartDTO> saveItemToCart(@RequestParam("item-id") Long itemId,
 			@RequestParam("qnt") Integer qnt, @RequestHeader("auth-token") String token) {
 
@@ -37,4 +37,18 @@ public class CartController {
 		}
 		return resp;
 	}
+
+	@GetMapping("/get")
+	public ResponseEntity<CartDTO> getCart(@RequestHeader("auth-token") String token) {
+		Long userId = jwtSrv.getUserIdFromToken(token);
+		ResponseEntity<CartDTO> resp = null;
+		CartDTO cartDto = cartService.getCartDto(userId);
+		if (cartDto != null) {
+			resp = new ResponseEntity<CartDTO>(cartDto, HttpStatus.OK);
+		} else {
+			resp = new ResponseEntity<CartDTO>(HttpStatus.BAD_REQUEST);
+		}
+		return resp;
+	}
+
 }

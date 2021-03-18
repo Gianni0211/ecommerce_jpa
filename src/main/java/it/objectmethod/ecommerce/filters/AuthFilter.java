@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import it.objectmethod.ecommerce.service.JWTService;
 
 @Component
+@Order(2)
 public class AuthFilter implements Filter {
 
 	@Autowired
@@ -30,13 +32,15 @@ public class AuthFilter implements Filter {
 		String url = httpReq.getRequestURI();
 		System.out.println(url);
 
-		if (url.endsWith("/login")) {
+		if (url.endsWith("/login") ) {
 
 			System.out.println("RICHIESTA APPROVATA");
 
 			chain.doFilter(request, response);
 		} else {
+			
 			String token = httpReq.getHeader("auth-token");
+			System.out.println(token);
 			if (token != null) {
 				if (jwtSrv.checkJWTToken(token)) {
 					System.out.println("TOKEN VALIDO RICHIESTA APPROVATA!");

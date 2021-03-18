@@ -4,7 +4,9 @@ public class ItemDTO {
 
 	private Long id;
 	private String name;
-	private Integer price;
+	private double price;
+	private Integer availability;
+	private String code;
 
 	public Long getId() {
 		return id;
@@ -22,12 +24,28 @@ public class ItemDTO {
 		this.name = name;
 	}
 
-	public Integer getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public Integer getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(Integer availability) {
+		this.availability = availability;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

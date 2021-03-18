@@ -25,7 +25,7 @@ public class Item {
 	private Integer availability;
 
 	@Column(name = "prezzo_unitario")
-	private Integer price;
+	private double price;
 
 	public Long getId() {
 		return id;
@@ -59,14 +59,12 @@ public class Item {
 		this.availability = availability;
 	}
 
-	public Integer getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
-
-	
 
 }

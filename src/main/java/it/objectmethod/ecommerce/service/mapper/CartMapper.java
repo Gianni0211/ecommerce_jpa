@@ -6,7 +6,7 @@ import org.mapstruct.Mapping;
 import it.objectmethod.ecommerce.entity.Cart;
 import it.objectmethod.ecommerce.service.dto.CartDTO;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {CartDetailMapper.class})
 public interface CartMapper extends EntityMapper<CartDTO, Cart> {
 
 	@Override
