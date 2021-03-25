@@ -3,6 +3,8 @@ package it.objectmethod.ecommerce.service;
 import java.sql.Date;
 import java.time.ZonedDateTime;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,7 @@ public class JWTService {
 	private UserMapper userMapper;
 
 	private static final String MY_SECRET_JWT_KEY = "my-secret-jwt-key";
+	private static final Logger logger = LogManager.getLogger(JWTService.class);
 
 	public String createJWTToken(User user) {
 
@@ -30,6 +33,7 @@ public class JWTService {
 		String token = JWT.create().withClaim("user_id", user.getId()).withClaim("user_name", user.getName())
 				.withExpiresAt(Date.from(ZonedDateTime.now().plusDays(1).toInstant())).sign(alg);
 
+		logger.info("Il token del Utente " + "[ " + user.getId() + " ]" + "e" + token);
 		return token;
 
 	}
@@ -46,10 +50,10 @@ public class JWTService {
 
 			Long userId = decoded.getClaim("user_id").asLong();
 			String userName = decoded.getClaim("user_name").asString();
-			System.out.println("Utente verificato! " + userId + " - " + userName);
+			logger.info("Utente verificato! " + userId + " - " + userName);
 			isValid = true;
 		} catch (JWTVerificationException e) {
-			e.printStackTrace();
+			logger.error("Token non valido", e);
 		}
 
 		return isValid;
@@ -69,6 +73,7 @@ public class JWTService {
 		User user = userMapper.toEntity(userDto);
 		JWTService serv = new JWTService();
 		String token = serv.createJWTToken(user);
+		logger.info("Il token dello user " + "[ " + userDto.getId() + " ]" +" e" + token);
 		return token;
 	}
 

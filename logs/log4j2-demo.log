@@ -30,3 +30,14 @@
 2021-03-18 10:04:58.036  INFO MBP-di-MacBook.homenet.telecomitalia.it --- [nio-8080-exec-2] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2021-03-18 10:04:58.038  INFO MBP-di-MacBook.homenet.telecomitalia.it --- [nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
 2021-03-18 10:04:58.046  INFO MBP-di-MacBook.homenet.telecomitalia.it --- [nio-8080-exec-2] o.s.w.s.DispatcherServlet                : Completed initialization in 7 ms
+2021-03-18 15:46:03.846  WARN MBP-di-MacBook.homenet.telecomitalia.it --- [l-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m55s777ms).
+2021-03-18 15:55:46.486  WARN MBP-di-MacBook.homenet.telecomitalia.it --- [l-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m42s516ms).
+2021-03-18 15:59:49.857  WARN MBP-di-MacBook.homenet.telecomitalia.it --- [l-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m33s352ms).
+2021-03-18 16:02:17.476  WARN MBP-di-MacBook.homenet.telecomitalia.it --- [l-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=57s602ms).
+2021-03-18 16:25:51.418  WARN MBP-di-MacBook.homenet.telecomitalia.it --- [l-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m3s848ms).
+2021-03-18 16:40:59.498  WARN MBP-di-MacBook.homenet.telecomitalia.it --- [l-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m38s36ms).
+2021-03-18 16:44:44.657  WARN MBP-di-MacBook.homenet.telecomitalia.it --- [l-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m15s137ms).
+2021-03-18 18:01:42.568  INFO MBP-di-MacBook.homenet.telecomitalia.it --- [extShutdownHook] o.s.s.c.ThreadPoolTaskExecutor           : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-03-18 18:01:42.613  INFO MBP-di-MacBook.homenet.telecomitalia.it --- [extShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-03-18 18:01:42.717  INFO MBP-di-MacBook.homenet.telecomitalia.it --- [extShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2021-03-18 18:01:42.776  INFO MBP-di-MacBook.homenet.telecomitalia.it --- [extShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.

@@ -1,5 +1,7 @@
 package it.objectmethod.ecommerce.controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +25,14 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 
+	private static final Logger logger = LogManager.getLogger(CartController.class);
+
 	@RequestMapping("/save")
 	public ResponseEntity<CartDTO> saveItemToCart(@RequestParam("item-id") Long itemId,
 			@RequestParam("qnt") Integer qnt, @RequestHeader("auth-token") String token) {
 
+		logger.info("Ricerca del articolo: " + "[ " + itemId + " ]");
+		logger.info("Ricerca della qnt: " + "[ " + qnt + " ]");
 		ResponseEntity<CartDTO> resp = null;
 		Long userId = jwtSrv.getUserIdFromToken(token);
 		CartDTO cartDto = cartService.addItem(userId, itemId, qnt);
@@ -43,6 +49,7 @@ public class CartController {
 		Long userId = jwtSrv.getUserIdFromToken(token);
 		ResponseEntity<CartDTO> resp = null;
 		CartDTO cartDto = cartService.getCartDto(userId);
+
 		if (cartDto != null) {
 			resp = new ResponseEntity<CartDTO>(cartDto, HttpStatus.OK);
 		} else {

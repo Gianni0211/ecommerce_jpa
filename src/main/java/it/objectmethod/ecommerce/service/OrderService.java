@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -34,8 +36,11 @@ public class OrderService {
 
 	@Autowired
 	private OrderMapper orderMapper;
+	
+	private static final Logger logger = LogManager.getLogger(OrderService.class);
 
 	public OrderDTO saveOrder(Long userId) {
+		logger.info("Creazione ordine per l'utente " + userId);
 		User user = userRepo.findById(userId).get();
 		Cart cart = cartRepo.findByUserId(userId);
 		OrderDTO orderDto = null;

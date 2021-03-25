@@ -26,6 +26,9 @@ public class Item {
 
 	@Column(name = "prezzo_unitario")
 	private double price;
+	
+	@Column(name = "url_img")
+	private String imgUrl;
 
 	public Long getId() {
 		return id;
@@ -66,5 +69,15 @@ public class Item {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
+	
 
 }

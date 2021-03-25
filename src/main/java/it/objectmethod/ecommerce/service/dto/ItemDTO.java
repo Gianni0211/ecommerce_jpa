@@ -7,6 +7,7 @@ public class ItemDTO {
 	private double price;
 	private Integer availability;
 	private String code;
+	private String imgUrl;
 
 	public Long getId() {
 		return id;
@@ -46,6 +47,14 @@ public class ItemDTO {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
 }
